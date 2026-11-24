@@ -97,12 +97,29 @@ New security headers on the gateway response:
 
 ## Known limitations and future work
 - **Unauthenticated DAST only.** Next step: an authenticated ZAP scan with a test user, to cover the logged-in API endpoints and access control (e.g. IDOR between customers).
-- **CSP `'unsafe-inline'`:** see finding #10.
+- **CSP `'unsafe-inline'`:** see finding #11.
 - **Quality gate fails on duplication (9.8% of new code),** because each microservice keeps its own `JwtUtils`. Future: a shared JWT library module.
 - **32 SonarQube reliability issues** in the frontend are accessibility (WCAG) issues, outside the scope of this security review.
 
 ## Reports
-- [`Reports/semgrep-reports/semgrep-results(before).txt`](Reports/semgrep-reports/semgrep-results(before).txt) · [`Reports/semgrep-reports/semgrep-results(after).txt`](Reports/semgrep-reports/semgrep-results(after).txt)
-- [`Reports/Zap-reports/Bankdesk-zap-report-before.html`](Reports/Zap-reports/Bankdesk-zap-report-before.html) · [`Reports/Zap-reports/Bankdesk-zap-report-after.html`](Reports/Zap-reports/Bankdesk-zap-report-after.html)
+### Semgrep
+| Before | After |
+|---|---|
+| ![](<screenshots/SAST/Semgrep/before.png>) | ![](<screenshots/SAST/Semgrep/after.png>) |
+
+### SonarQube
+| Before | After |
+|---|---|
+| ![](<screenshots/SAST/sonarcloud/before/sonar-before-summary.png>) | ![](<screenshots/SAST/sonarcloud/after/sonar-after-summary.png>) |
+| ![](<screenshots/SAST/sonarcloud/before/sonar-dependency-cve-alert.png>) | ![](<screenshots/SAST/sonarcloud/after/no-CVE-(after).png>) |
+
+### OWASP ZAP
+| Before | After |
+|---|---|
+| ![](<screenshots/DAST(ZAP)/Before/Bankdesk-ZAPAlerts-Before.png>) | ![](<screenshots/DAST(ZAP)/After/Bankdesk-ZAPAlerts-After.png>) |
+
+New security headers on the gateway response:
+
+![](<screenshots/DAST(ZAP)/After/detailed-ZAP-Alert After.png>)
 
 *Note: the frontend of BankDesk was AI-generated (out of scope); the backend, infrastructure and this security review are my own work.*
