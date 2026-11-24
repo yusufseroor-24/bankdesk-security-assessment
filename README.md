@@ -2,13 +2,13 @@
 
 A security review of **[BankDesk](https://github.com/yusufseroor-24/bank-ticketing-desk)**, my Spring Boot microservices banking ticket system, using static analysis (SAST), dynamic analysis (DAST) and manual code review. I triaged each finding, fixed the real issues, and re-scanned to confirm the fixes.
 
-| | |
+| Area | Details |
 |---|---|
 | **Target** | 6 Spring Boot services behind an API gateway, deployed on AWS EC2 with Docker and a Jenkins CI/CD pipeline |
 | **SAST** | SonarQube Cloud, Semgrep (run in GitHub Actions) |
 | **DAST** | OWASP ZAP 2.17 (automated scan: spider, AJAX spider and active scan) |
 | **Manual review** | Source code, Dockerfiles, configuration |
-| **Scope** | Unauthenticated DAST scan of the deployed app; full source for SAST |
+| **Scope** | Unauthenticated DAST scan of the deployed app and full source for SAST |
 
 ## Results summary
 
