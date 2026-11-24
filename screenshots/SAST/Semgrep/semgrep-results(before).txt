@@ -1,0 +1,115 @@
+                   
+                   
+┌─────────────────┐
+│ 9 Code Findings │
+└─────────────────┘
+                                 
+    .github/workflows/semgrep.yml
+    ❯❱ yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
+          ❰❰ Blocking ❱❱
+          GitHub Actions step uses a mutable tag or branch reference. Tags and branch names can be silently   
+          repointed by the action owner, enabling supply-chain attacks — as seen in the trivy-action and kics-
+          github-action compromises. Pin the reference to a full 40-character commit SHA instead, e.g. `uses: 
+          actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608`.                                         
+          Details: https://sg.run/2LgAL                                                                       
+                                                                                                              
+           15┆ - uses: actions/checkout@v4
+            ⋮┆----------------------------------------
+           20┆ uses: actions/upload-artifact@v4
+                         
+    ai-service/Dockerfile
+   ❯❯❱ dockerfile.security.missing-user-entrypoint.missing-user-entrypoint
+          ❰❰ Blocking ❱❱
+          By not specifying a USER, a program in the container may run as 'root'. This is a security hazard.
+          If an attacker can control a process running as root, they may have control over the container.   
+          Ensure that the last USER in a Dockerfile is a USER other than 'root'.                            
+          Details: https://sg.run/k281                                                                      
+                                                                                                            
+           ▶▶┆ Autofix ▶ USER non-root ENTRYPOINT                                              
+              ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dev",
+              "-jar", "/app/app.jar"]                                                          
+           12┆ ENTRYPOINT                                                                               
+               ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dev", "-jar",
+               "/app/app.jar"]                                                                          
+                          
+    api-gateway/Dockerfile
+   ❯❯❱ dockerfile.security.missing-user-entrypoint.missing-user-entrypoint
+          ❰❰ Blocking ❱❱
+          By not specifying a USER, a program in the container may run as 'root'. This is a security hazard.
+          If an attacker can control a process running as root, they may have control over the container.   
+          Ensure that the last USER in a Dockerfile is a USER other than 'root'.                            
+          Details: https://sg.run/k281                                                                      
+                                                                                                            
+           ▶▶┆ Autofix ▶ USER non-root ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-jar",
+              "/app/app.jar"]                                                                               
+           13┆ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/app.jar"]
+                            
+    fraud-service/Dockerfile
+   ❯❯❱ dockerfile.security.missing-user-entrypoint.missing-user-entrypoint
+          ❰❰ Blocking ❱❱
+          By not specifying a USER, a program in the container may run as 'root'. This is a security hazard.
+          If an attacker can control a process running as root, they may have control over the container.   
+          Ensure that the last USER in a Dockerfile is a USER other than 'root'.                            
+          Details: https://sg.run/k281                                                                      
+                                                                                                            
+           ▶▶┆ Autofix ▶ USER non-root ENTRYPOINT                                              
+              ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dev",
+              "-jar", "/app/app.jar"]                                                          
+           22┆ ENTRYPOINT                                                                               
+               ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dev", "-jar",
+               "/app/app.jar"]                                                                          
+                               
+    identity-service/Dockerfile
+   ❯❯❱ dockerfile.security.missing-user-entrypoint.missing-user-entrypoint
+          ❰❰ Blocking ❱❱
+          By not specifying a USER, a program in the container may run as 'root'. This is a security hazard.
+          If an attacker can control a process running as root, they may have control over the container.   
+          Ensure that the last USER in a Dockerfile is a USER other than 'root'.                            
+          Details: https://sg.run/k281                                                                      
+                                                                                                            
+           ▶▶┆ Autofix ▶ USER non-root ENTRYPOINT                                              
+              ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dev",
+              "-jar", "/app/app.jar"]                                                          
+           22┆ ENTRYPOINT                                                                               
+               ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dev", "-jar",
+               "/app/app.jar"]                                                                          
+                      
+    jenkins/Dockerfile
+   ❯❯❱ dockerfile.security.last-user-is-root.last-user-is-root
+          ❰❰ Blocking ❱❱
+          The last user in the container is 'root'. This is a security hazard because if an attacker gains
+          control of the container they will have root access. Switch back to another user after running  
+          commands as 'root'.                                                                             
+          Details: https://sg.run/5Z43                                                                    
+                                                                                                          
+            3┆ USER root
+                                   
+    notification-service/Dockerfile
+   ❯❯❱ dockerfile.security.missing-user-entrypoint.missing-user-entrypoint
+          ❰❰ Blocking ❱❱
+          By not specifying a USER, a program in the container may run as 'root'. This is a security hazard.
+          If an attacker can control a process running as root, they may have control over the container.   
+          Ensure that the last USER in a Dockerfile is a USER other than 'root'.                            
+          Details: https://sg.run/k281                                                                      
+                                                                                                            
+           ▶▶┆ Autofix ▶ USER non-root ENTRYPOINT                                              
+              ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dev",
+              "-jar", "/app/app.jar"]                                                          
+           22┆ ENTRYPOINT                                                                               
+               ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dev", "-jar",
+               "/app/app.jar"]                                                                          
+                             
+    ticket-service/Dockerfile
+   ❯❯❱ dockerfile.security.missing-user-entrypoint.missing-user-entrypoint
+          ❰❰ Blocking ❱❱
+          By not specifying a USER, a program in the container may run as 'root'. This is a security hazard.
+          If an attacker can control a process running as root, they may have control over the container.   
+          Ensure that the last USER in a Dockerfile is a USER other than 'root'.                            
+          Details: https://sg.run/k281                                                                      
+                                                                                                            
+           ▶▶┆ Autofix ▶ USER non-root ENTRYPOINT                                              
+              ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dev",
+              "-jar", "/app/app.jar"]                                                          
+           22┆ ENTRYPOINT                                                                               
+               ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dev", "-jar",
+               "/app/app.jar"]                                                                          
